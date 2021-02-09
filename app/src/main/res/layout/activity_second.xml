@@ -9,4 +9,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Bienvenue dans l'activité 2"></TextView>
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Voici le text sauvegardé : "></TextView>
 </LinearLayout>

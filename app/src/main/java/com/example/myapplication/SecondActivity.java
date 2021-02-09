@@ -2,16 +2,12 @@ package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Toast;
 
 public class SecondActivity extends AppCompatActivity {
 
+    
     /**
      * Exécuté chaque fois que l'utilisateur clique sur l'icône de l'application pour une première fois.
      * <p>

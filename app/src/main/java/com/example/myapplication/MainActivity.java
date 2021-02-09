@@ -13,8 +13,8 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-    SharedPreferences CYCLEVIEPREFS;
     String INFOSECONDACTIVITY;
+    public static final String PREFS_NAME = "MyPrefsFile";
 
 
     /**
@@ -75,8 +75,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         popUp("onResume()");
-        CYCLEVIEPREFS = getSharedPreferences("cycle_vie_prefs", Context.MODE_PRIVATE);
-        setTxTValeur(CYCLEVIEPREFS.getString("valeur", ""));
+        SharedPreferences settings = getSharedPreferences("cycle_vie_prefs", Context.MODE_PRIVATE);
+        setTxTValeur(settings.getString("valeur", ""));
 
     }
 
@@ -162,8 +162,13 @@ public class MainActivity extends AppCompatActivity {
     View.OnClickListener btnEnvoyerOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            popUp("valeur saisie = " + getTxtValeur());
+            String msg = getTxtValeur();
+            popUp("valeur saisie = " + msg);
             INFOSECONDACTIVITY = getTxtValeur();
+
+            SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+            SharedPreferences.Editor editor = settings.edit();
+            editor.putString("SettingSent",msg);
         }
     };
 
