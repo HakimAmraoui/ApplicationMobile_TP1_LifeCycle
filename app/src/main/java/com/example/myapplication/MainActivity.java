@@ -1,20 +1,22 @@
 package com.example.myapplication;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 public class MainActivity extends AppCompatActivity {
 
-    String INFOSECONDACTIVITY;
+    final String CYCLEVIEPREFS = "cycle_vie_prefs";
     public static final String PREFS_NAME = "MyPrefsFile";
+    private static final String TAG = "MyActivity";
 
 
     /**
@@ -35,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         btnEnvoyer.setOnClickListener(btnEnvoyerOnClickListener);
 
         Button btnpAct2 = (Button) findViewById(R.id.btnAct2);
-        btnpAct2.setOnClickListener(btnAct2OnClickListener);
+        btnpAct2.setOnClickListener(btnAct2ndClickListener);
 
     }
 
@@ -75,8 +77,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         popUp("onResume()");
-        SharedPreferences settings = getSharedPreferences("cycle_vie_prefs", Context.MODE_PRIVATE);
-        setTxTValeur(settings.getString("valeur", ""));
+        SharedPreferences settings = getSharedPreferences(CYCLEVIEPREFS, Context.MODE_PRIVATE);
+        setTxTValeur(settings.getString("variableA", ""));
 
     }
 
@@ -106,7 +108,8 @@ public class MainActivity extends AppCompatActivity {
         }
         SharedPreferences settings = getSharedPreferences("cycle_vie_prefs", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = settings.edit();
-        editor.putString("valeur", getTxtValeur());
+        editor.putString("variableA", getTxtValeur());
+        Log.v(TAG, "Ici");
         editor.commit();
 
     }
@@ -149,10 +152,11 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
-    View.OnClickListener btnAct2OnClickListener = new View.OnClickListener() {
+    View.OnClickListener btnAct2ndClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             Intent intent = new Intent(v.getContext(), SecondActivity.class);
+            intent.putExtra("variableB", getTxtValeur());
             startActivity(intent);
         }
     };
@@ -164,11 +168,12 @@ public class MainActivity extends AppCompatActivity {
         public void onClick(View v) {
             String msg = getTxtValeur();
             popUp("valeur saisie = " + msg);
+/*
             INFOSECONDACTIVITY = getTxtValeur();
 
             SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
             SharedPreferences.Editor editor = settings.edit();
-            editor.putString("SettingSent",msg);
+            editor.putString("SettingSent",msg);*/
         }
     };
 

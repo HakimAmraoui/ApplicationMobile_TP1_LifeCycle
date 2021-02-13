@@ -2,12 +2,19 @@ package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class SecondActivity extends AppCompatActivity {
 
-    
+
+    final String CYCLEVIEPREFS = "cycle_vie_prefs";
+
+
     /**
      * Exécuté chaque fois que l'utilisateur clique sur l'icône de l'application pour une première fois.
      * <p>
@@ -16,8 +23,27 @@ public class SecondActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_second);
         popUp("onCreate()");
+
+        TextView textView2 = (TextView) findViewById(R.id.textView2);
+        TextView textView3 = (TextView) findViewById(R.id.textView3);
+
+
+        // Question a
+
+        SharedPreferences settings = getSharedPreferences(CYCLEVIEPREFS, Context.MODE_PRIVATE);
+        String varA = settings.getString("variableA", "");
+        textView2.setText(textView2.getText() + varA);
+
+
+        // Question b
+
+        Intent intent = getIntent();
+        String v = "";
+        if (intent != null)   v=intent.getStringExtra("variableB") ;
+        textView3.setText(textView3.getText() + v);
+
     }
 
     /**
