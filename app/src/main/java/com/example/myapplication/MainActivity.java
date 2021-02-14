@@ -182,6 +182,17 @@ public class MainActivity extends AppCompatActivity {
         return zoneValeur.getText().toString();
     }
 
+    // Variable transmise pour la seconde activite
+    // question c
+    protected void onSaveInstanceState(Bundle savedInstanceState) {
+        super.onSaveInstanceState(savedInstanceState);
+        savedInstanceState.putString("variableC", getTxtValeur());
+        Log.v(TAG, "Y a r");
+    }
+
+
+
+
     public void popUp(String message) {
         Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }

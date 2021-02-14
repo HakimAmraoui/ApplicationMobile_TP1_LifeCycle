@@ -23,18 +23,22 @@ public class SecondActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
+
         setContentView(R.layout.activity_second);
         popUp("onCreate()");
 
-        TextView textView2 = (TextView) findViewById(R.id.textView2);
-        TextView textView3 = (TextView) findViewById(R.id.textView3);
+        TextView textViewA = (TextView) findViewById(R.id.textView1);
+        TextView textViewB = (TextView) findViewById(R.id.textView2);
+        TextView textViewC = (TextView) findViewById(R.id.textView3);
 
 
         // Question a
 
         SharedPreferences settings = getSharedPreferences(CYCLEVIEPREFS, Context.MODE_PRIVATE);
         String varA = settings.getString("variableA", "");
-        textView2.setText(textView2.getText() + varA);
+        textViewA.setText(textViewA.getText() + varA);
 
 
         // Question b
@@ -42,7 +46,17 @@ public class SecondActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String v = "";
         if (intent != null)   v=intent.getStringExtra("variableB") ;
-        textView3.setText(textView3.getText() + v);
+        textViewB.setText(textViewB.getText() + v);
+
+
+        // Question C
+
+        if (savedInstanceState != null){
+            String valeur = savedInstanceState.getString("variableC");
+            textViewC.setText(textViewC.getText() + valeur);
+        }else {
+            textViewC.setText("Ya r");
+        }
 
     }
 
